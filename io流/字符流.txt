@@ -1,0 +1,127 @@
+1.纯文本的读取
+1）建立联系
+2）选择流reader
+3）读取 char[]数组
+4）释放资源
+package io;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+
+/**
+ * 字符流的读取
+ * @author 王思伟
+ *
+ */
+public class demo08 {
+    public static void main(String [] args) throws IOException {
+        //建立联系
+        String str="D:/others/wang.txt";
+        File file=new File(str);
+        //选择流
+        Reader re= new FileReader(file);
+        //读取
+        char [] arr=new char[10];
+        int len=0;//实际读取的长度
+        while(-1!=(len=re.read(arr))) {
+            String str1=new String(arr,0,len);
+            System.out.println(str1);
+                
+            }
+            //释放资源
+            if(null!=re) {
+                re.close();
+            }
+            
+        }
+        
+    }
+
+
+2.纯文本的写入
+1）建立联系
+2）选择流 writer
+3）写 char[]
+4)释放资源
+package io;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+
+/**
+ * 字节流的写出
+ * 
+ * @author 王思伟
+ *
+ */
+public class debo09 {
+    public static void main(String [] args) throws IOException {
+        //建立联系
+        File file=new File("D:/others/wang.txt");
+        //选择流
+        Writer writer=new FileWriter(file);
+        //操作
+        String str="王思伟哈哈哈哈哈";
+        writer.write(str);
+               writer.flush();
+        //释放资源
+        if(null!=writer) {
+            writer.close();
+        }
+        
+        
+    }
+
+}
+3.纯文本的拷贝
+package io;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
+
+/**
+ * 纯文本的拷贝
+ * @author 王思伟
+ *
+ */
+public class demo10 {
+    public static void main(String [] args) throws Exception {
+        //建立联系
+        String str="D:/others/wang.txt";
+        String str1="D:/others/wang1.txt";
+        File file=new File(str);
+        File file1=new File(str1);
+        //选择流
+        Reader re= new FileReader(file);
+        Writer writer=new FileWriter(file1);
+        //读取
+        char [] arr=new char[100];
+        int len=0;//实际读取的长度
+        while(-1!=(len=re.read(arr))) {
+            writer.write(arr, 0, len);
+            writer.flush();
+            }
+            //释放资源
+            if(null!=re) {
+                re.close();
+            }
+            if(null!=writer) {
+                writer.close();
+            }
+            
+        }
+        
+    }
+
+
+
+

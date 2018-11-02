@@ -1,0 +1,205 @@
+                                                                     文件的读取（inputstream）
+package io;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+/**
+ * 1.建立联系
+    2.选择流
+    3.操作
+    4.释放资源
+ * @author 王思伟
+ *
+ */
+public class demo1 {
+  public static void main(String [] args) throws IOException{
+   //建立联系
+   File file=new File("D:/others/wang.txt");
+   //选择流,字节流
+   InputStream input=new FileInputStream(file);
+   //操作
+   byte[] arr=new byte[10]; 
+   int len=0;//实际读取的大小
+   while(-1!=(len=input.read(arr))) {
+    String str=new String(arr,0,len);
+    System.out.println(str);
+   }
+   if(null!=input)
+    input.close();
+  }
+	
+}
+
+                                                                         写入文件（outputstream）
+package io;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+
+/**
+ * 写出文件
+ * 1.建立联系
+ * 2.选择流 outputstream fileoutputstream
+ * 3.操作 write+flush
+ * 4.释放资源 关闭文件
+ * @author 王思伟
+ *
+ */
+public class demo05 {
+  public static void main(String [] args) throws FileNotFoundException {
+   //建立联系
+   File file=new File("D:/others/wang.txt");
+   //选择流
+   OutputStream output=new FileOutputStream(file,true);//文件的追加 
+   //操作
+   String str="wangsiwei is good!!!!!!!\n";
+   byte [] arr=str.getBytes();//字符串转数组
+   try {
+    output.write(arr, 0, arr.length);
+    output.flush();//强制刷新出去
+   } catch (IOException e) {
+    // TODO Auto-generated catch block
+    e.printStackTrace();
+   }finally {
+    if(null!=output) {
+     try {
+      output.close();
+     } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+     }
+    }
+   }
+  }
+}
+                                                            文件的拷贝（inputstream 和outputstream）
+package io;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+/**
+ * 文件的拷贝
+ * 1.建立联系 有源头和目的地
+ * 2.选择流：输入流和输入流
+ * 3.操作，边读边写
+ * 4.关闭两个流
+ * @author 王思伟
+ *
+ */
+public class deom06 {
+ public static void main(String [] args) throws IOException {
+  //建立联系
+  File file1=new File("D:/others/1.jpg");
+  File file2=new File("D:/others/wangsiwei/100.bmp");
+  //选择流
+  try {
+   InputStream in=new FileInputStream(file1);//输出流
+   OutputStream out=new FileOutputStream(file2);//输出流
+   //文件的拷贝
+   byte[] arr=new byte[1024];
+   int len=0;
+   while(-1!=(len=in.read(arr))) {
+    out.write(arr, 0, len);
+    
+   }
+   out.flush();//强行刷出
+   //关闭两个流
+   in.close();
+   out.close();
+  } catch (FileNotFoundException e) {
+   // TODO Auto-generated catch block
+   e.printStackTrace();
+  }//输入流
+  
+ }
+
+}
+                                                                                                   文件夹的拷贝
+package io;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+import javax.annotation.processing.Filer;
+
+/**
+ * 文件夹的拷贝
+    递归思想
+    文件夹的拷贝的关于文件的拷贝加文件夹的创建
+    源file对象
+    目标file对象
+ * 
+ * @author 王思伟
+ *
+ */
+public class demo07 {
+    public static void main(String [] args) throws IOException {
+        //源文件
+        String path="D:/others/wangsiwei";
+        String path1="D:/others/wang";
+        File file1=new File(path);
+        File file2=new File(path1);
+        //判断是目录还是文件
+        if(file1.isDirectory()){//文件夹
+            file2=new File(path1,file1.getName());//添加文件夹
+        }
+        copyfile(file1,file2);
+        
+        
+    }
+    public static void copyfile(File file1,File file2) throws IOException {
+                if(file1.isFile()) {
+                copyFile(file1,file2);
+                }else if(file1.isDirectory()){
+                    //确保目标目录存在
+                    file2.mkdirs();
+                    //获取下一级目录或文件
+                    for(File file: file1.listFiles()) {
+                        copyfile(file,new File(file2.getName()));
+                        
+                        
+                    }
+                    
+                }
+        
+    }
+    public static void copyFile(File file1,File file2) throws IOException {
+        try {
+            InputStream in=new FileInputStream(file1);//输出流
+            OutputStream out=new FileOutputStream(file2);//输出流
+            //文件的拷贝
+            byte[] arr=new byte[1024];
+            int len=0;
+            while(-1!=(len=in.read(arr))) {
+                out.write(arr, 0, len);
+                
+            }
+            out.flush();//强行刷出
+            //关闭两个流
+            in.close();
+            out.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }//输入流
+        
+    }
+    
+}
+如果目标地已经是一个文件，不能创建一个与文件夹相同的文件

@@ -1,0 +1,102 @@
+处理流：缓冲流（增加功能，提高性能）
+1.字节缓冲流
+bufferedinputstream
+bufferedoutputstream
+package io;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+/**
+ * 文件的拷贝
+ * 1.建立联系  有源头和目的地
+ * 2.选择流：输入流和输入流
+ * 3.操作，边读边写
+ * 4.关闭两个流
+ * @author 王思伟
+ *
+ */
+public class deom06 {
+    public static void main(String [] args) throws IOException {
+        //建立联系
+        File file1=new File("D:/others/1.jpg");
+        File file2=new File("D:/others/wangsiwei/100.bmp");
+        //选择流
+        try {
+            InputStream in=new BufferedInputStream(new FileInputStream(file1));//输出流,加入缓冲流，提高性能
+            OutputStream out=new BufferedOutputStream(new FileOutputStream(file2));//输出流,加入缓冲流，提高性能
+            //文件的拷贝
+            byte[] arr=new byte[1024];
+            int len=0;
+            while(-1!=(len=in.read(arr))) {
+                out.write(arr, 0, len);
+                
+            }
+            out.flush();//强行刷出
+            //关闭两个流
+            in.close();
+            out.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }//输入流
+        
+    }
+
+}
+2.字符缓冲流
+bufferedreader
+bufferedwriter
+
+package io;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
+
+/**
+ * 纯文本的拷贝
+ * @author 王思伟
+ *
+ */
+public class demo10 {
+    public static void main(String [] args) throws Exception {
+        //建立联系
+        String str="D:/others/wang.txt";
+        String str1="D:/others/wang1.txt";
+        File file=new File(str);
+        File file1=new File(str1);
+        //选择流
+        Reader re= new BufferedReader(new FileReader(file));
+        Writer writer=new BufferedWriter(new FileWriter(file1));
+        //读取
+        char [] arr=new char[100];
+        int len=0;//实际读取的长度
+        while(-1!=(len=re.read(arr))) {
+            writer.write(arr, 0, len);
+            writer.flush();
+            }
+            //释放资源
+            if(null!=re) {
+                re.close();
+            }
+            if(null!=writer) {
+                writer.close();
+            }
+            
+        }
+        
+    }
+
