@@ -1,0 +1,50 @@
+package xiancheng;
+/**
+ * 线程模拟龟兔赛跑
+ * 1.创建线程 继承Thread +重写run（线程体）
+ * 2.使用线程：创建子类对象，调用对象.start方法，
+ * 表示把该对象加入到线程中
+ * 
+ */
+public class demo0 extends Thread{
+ public void run() {
+  //线程体
+  for(int i=0;i<10;i++) {
+   System.out.println("兔子跑了");
+  }
+  
+ }
+}
+ class demo01 extends Thread{
+ public void run() {
+  //线程体
+  for(int i=0;i<10;i++) {
+   System.out.println("乌龟跑了");
+  }
+ }
+ }
+ 
+
+
+package xiancheng;
+/**
+ * 多线程的简单实现，在这个程序中共有5个线程，两个具体的，
+ * 一个main线程，后台两个
+ * 如果调用start方法那么就会默认为一条路径，不是多线程
+ * @author 王思伟
+ *
+ */
+public class test {
+ public static void main(String [] args) {
+  //创建子类对象
+  demo0 t1= new demo0();
+  demo01 t2=new demo01();
+  //调用start方法,将此对像加入到线程中，等待cpu调用
+  t1.start();//不要调用run方法，由程序内部调用具体方法
+  t2.start();
+  for(int i=0;i<10;i++) {
+   System.out.println("王思伟跑了");
+  }
+ }
+
+}
