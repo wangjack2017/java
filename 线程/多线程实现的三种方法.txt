@@ -1,0 +1,11 @@
+多线程的实现方法：
+一.继承thread+重写run方法
+调用strat方法
+二.使用runnable接口+重写run方法，使用静态代理
+1.创建真实角色
+2.创建代理和角色加真实角色的引用
+3.调用start方法
+三.使用callable接口实现多线程，好处是有返回值，可以抛出异常
+ExecutorService ser=Executors.newFixedThreadPool(2);//任务调度的个数
+Future<Integer> result=ser.submit(t);//未来的执行，产生返回值
+int num=result.get();返回值
