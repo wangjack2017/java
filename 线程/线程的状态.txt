@@ -1,0 +1,202 @@
+线程的状态：
+1.新生状态
+2.就绪状态
+3.运行状态
+4.阻塞状态
+5.死亡状态
+二。线程停止
+1.正常结束
+2.外部干扰
+线程类 定义中线程体使用的标识
+线程体使用该标识
+对外提供方法改变标识
+外部根据条件调用相应的方法
+package xiancheng;
+/**
+ * 停止线程
+ * 外部干涉
+ *  1.线程类 定义中线程体使用的标识
+    2.线程体使用该标识
+    3.对外提供方法改变标识
+    4.调用的相应的方法
+ * @author 王思伟
+ *
+ */
+
+public class demo4 {
+    public static void main(String [] args) throws InterruptedException {
+        study s=new study();
+        Thread t=new Thread(s);
+        t.start();
+        Thread.sleep(200);
+        //外部干涉使用标识进行干涉
+        //s.setFlag(false);
+        //外部使用限制条件进行干涉
+        for(int i=0;i<100;i++){
+            if(i==50)
+                s.stop();
+        }
+    }
+
+}
+class study implements Runnable{
+    //线程类 定义中线程体使用的标识
+    private boolean flag=true;
+    
+    public boolean isFlag() {
+        return flag;
+    }
+
+    public void stop() {
+        // TODO Auto-generated method stub
+        this.flag=false;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
+    }
+
+    @Override
+    public void run() {
+        //线程体使用该标识
+        while(flag) {
+            System.out.println("study thread......");
+        }
+        // TODO Auto-generated method stub
+        
+    }
+    
+}
+三.阻塞
+1.join()方法合并线程
+package xiancheng;
+/**
+ * 使用join()合并线程使线程阻塞
+ * @author 王思伟
+ *
+ */
+public class demo5  extends Thread {
+    public static void main(String []args) throws InterruptedException {
+        demo5 t=new demo5();//新生
+        t.start();//就绪,等待cpu调度
+        for(int i=0;i<100;i++) {
+            if(i==50) {
+                t.join();//main线程阻塞
+            }
+            System.out.println("main....."+i);
+        }
+    }
+    public void run() {
+        for(int i=0;i<100;i++) {
+            System.out.println("join......."+i);
+        }
+    }
+
+}
+
+2.yield()暂停当前线程static方法
+package xiancheng;
+/**
+ * 使用yield()暂停线程使i线程阻塞
+ * @author 王思伟
+ *
+ */
+public class demo5  extends Thread {
+    public static void main(String []args) throws InterruptedException {
+        demo5 t=new demo5();//新生
+        t.start();//就绪,等待cpu调度
+        for(int i=0;i<100;i++) {
+            if(i%20==0) {
+                //暂停本线程
+                Thread.yield();
+            }
+            System.out.println("main....."+i);
+        }
+    }
+    public void run() {
+        for(int i=0;i<100;i++) {
+            System.out.println("yield......."+i);
+        }
+    }
+
+}
+3.sleep()方法休眠暂停线程，不释放锁
+1）与时间倒计时相关
+package xiancheng;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+/**
+ * 倒计时
+ * 倒计是个数1秒打印一个
+ * @author 王思伟
+ *
+ */
+public class demo6 {
+ public static void main(String [] args) throws InterruptedException {
+  Date endtime=new Date(System.currentTimeMillis());
+  long end=endtime.getTime();
+  while(true) {
+   //输出
+   System.out.println(new SimpleDateFormat("mm:ss").format(endtime));
+   //构建下一秒的时间
+   endtime=new Date(endtime.getTime()-1000);
+   Thread.sleep(1000);
+   //十秒以内就继续
+   if(end-10000>endtime.getTime())
+    break;
+  }
+  
+ }
+ public static void test() throws InterruptedException {
+  int num=10;
+  while(true) {
+   System.out.println("....."+num--);
+   Thread.sleep(1000);
+   if(num<=0)
+    break;
+  }
+ }
+}
+
+
+2）模拟网络延时
+package xiancheng;
+/**
+ * 使用sleep模拟网络延迟
+ * @author 王思伟
+ *
+ */
+public class web12306 implements Runnable {
+    private int num=50;
+    @Override
+    public void run() {
+        // TODO Auto-generated method stub
+        while(true) {
+            if(num<=0) {
+                break;
+            }
+            try {
+                Thread.sleep(500);//使用sleep模拟网络延迟
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            System.out.println(Thread.currentThread().getName()+"抢到了"+num--);
+        }
+    }
+    public static void main(String [] args) {
+        //创建真实角色
+        web12306 wang=new web12306();
+        //创建代理角色
+        Thread s1=new Thread(wang,"王思伟");
+        Thread s2=new Thread(wang,"王晓伟");
+        Thread s3=new Thread(wang,"王大伟");
+        //启动线程
+        s1.start();
+        s2.start();
+        s3.start();
+    }
+
+}
