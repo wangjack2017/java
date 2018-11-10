@@ -1,0 +1,143 @@
+package xiancheng;
+/*
+ * 静态代理 设计模式(类已经被写好了)
+ * 1.真实角色 
+ * 2.代理角色  代理角色要持有真实角色的引用
+ * 3.二者实现相同的接口
+ * runnable接口
+ * 
+ * @author 王思伟
+ *
+ */
+public class demo2 {
+        public static void main(String [] args) {
+            //创建真实角色
+            wang w=new wei();
+            //创建代理角色
+            wang w1=new wer(w);
+            w1.si();
+            
+        }    
+}
+//接口
+interface wang{
+    public abstract void si();
+}
+//真实角色通过类来实现接口
+class wei implements wang{
+
+    @Override
+    public void si() {
+        System.out.println("我结婚了");
+        // TODO Auto-generated method stub
+        
+        
+    }
+}
+//代理角色也是通过接口来实现
+class wer implements wang{
+    private wang a;//持有真实身份的引用
+    
+    public wer(wang w) {
+        this.a=w;
+    }
+    public wang getA() {
+        return a;
+    }
+    public void setA(wei a) {
+        this.a = a;
+    }
+    public void before() {
+        System.out.println("您结婚了");
+    }
+    public void after() {
+        System.out.println("他结婚了");
+    }
+    @Override
+    public void si() {
+        // TODO Auto-generated method stub
+        before();
+        a.si();
+        after();
+    }
+    
+}
+
+
+
+
+
+package xiancheng;
+/**
+ * 推荐runnable创建线程的原因
+ * 1.避免单继承的局限性
+ * 2.便于共享资源
+ * 
+ * 
+ * 
+ * 
+ * 使用runnable接口实现多线程
+ * 1.类实现runnable接口+重写run()方法------真实角色
+ * 2.启动线程
+ * 创建真实角色
+ * 创建代理角色+真实角色引用
+ * 启动线程
+ * @author 王思伟
+ *
+ */
+public class demo3  implements Runnable{
+
+    @Override
+    public void run() {
+        // TODO Auto-generated method stub
+        for(int i=0;i<1000;i++) {
+            System.out.println("一边玩手机，一边敲代码。。。");
+        }
+    }
+
+}
+package xiancheng;
+
+public class demo3yong {
+    public static void main(String [] args) {
+        // 创建真实角色
+        demo3 w=new demo3();
+        // 创建代理角色+真实角色引用
+        Thread si=new Thread(w);
+         //启动线程
+        si.start();
+        //main函数的线程
+        for(int i=0;i<1000;i++) {
+            System.out.println("一边看电视。。。。");
+        }
+    }
+}
+应用例子：
+package xiancheng;
+
+public class web12306 implements Runnable {
+    private int num=50;
+    @Override
+    public void run() {
+        // TODO Auto-generated method stub
+        while(true) {
+            if(num<=0) {
+                break;
+            }
+            System.out.println(Thread.currentThread().getName()+"抢到了"+num--);
+        }
+    }
+    public static void main(String [] args) {
+        //创建真实角色
+        web12306 wang=new web12306();
+        //创建代理角色
+        Thread s1=new Thread(wang,"王思伟");
+        Thread s2=new Thread(wang,"王晓伟");
+        Thread s3=new Thread(wang,"王大伟");
+        //启动线程
+        s1.start();
+        s2.start();
+        s3.start();
+    }
+
+}
