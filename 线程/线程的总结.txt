@@ -1,0 +1,26 @@
+一，创建线程
+1.继承Thread
+2.使用runnable
+3.使用callable
+二。线程的状态
+创建
+就绪
+运行
+阻塞
+终止
+1.终止线程（重点）
+2.阻塞的方法：join          yield        sleep
+三.线程的信息、
+1.Thread.currentThread
+2.获得名称，设置名称，设置优先级，判断状态
+四.线程的同步
+同步块
+synchronized(引用类型|this|类.class){
+}
+同步方法
+synchronized
+设计模式
+五.消费者生产者模式
+信号灯法
+六.任务的调度
+后期:juc quartz
