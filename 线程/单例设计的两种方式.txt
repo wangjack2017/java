@@ -1,0 +1,181 @@
+package xiancheng;
+/**
+ * 单例设计模式
+ * 确保一个类只有一个对象
+ * 懒汉式
+ * 1.构造器私有化，避免外部直接创建对象
+ * 2.声明一个私有的静态变量
+ * 3.创建一个对外的公共的静态方法访问该变量，如果变量没有对象，创建该对象
+ * @author 王思伟
+ *
+ */
+public class demo12 {
+    public static void main(String [] args) throws InterruptedException {
+        /*懒汉式创建对象，单线程中jvm1和jvm2的地址一样
+        jvm jvm1=jvm.jvm01(200);
+        jvm jvm2=jvm.jvm01(400);
+        System.out.println(jvm1);
+        System.out.println(jvm2);
+        */
+        
+        
+        //多线程时如果线程出现并发问题地址不一样
+        //加入synchronize同步方法变成线程安全，地址一样
+        jvmthread ti=new jvmthread(100);
+        jvmthread tii=new jvmthread(500);
+        //启动线程
+        ti.start();
+        tii.start();
+        
+        
+    }
+    
+
+}
+class jvmthread extends Thread{
+    private long time;
+    public jvmthread () {
+        
+    }
+    public jvmthread(long time) {
+        this.time=time;
+    }
+    public void run() {
+        try {
+            
+            System.out.println(Thread.currentThread().getName()+"--创建"+jvm.jvm03(time));
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+}
+/**
+ * 确保一个类只有一个对象
+ * 懒汉式的单例设计模式
+ * 1.构造器私有化，避免外部直接创建对象
+ * 2.声明一个私有的静态变量
+ * 3.创建一个对外的公共的静态方法访问该变量，如果变量没有对象，创建该对象
+ * @author 王思伟
+ *
+ */
+class jvm{
+    //声明一个私有的静态变量
+    private  static jvm instance=null;
+    //构造器私有化，避免外部直接创建对象
+    private jvm() {
+        
+    }
+    //创建一个对外的公共的静态方法访问该变量，如果变量没有对象，创建该对象
+    //线程不安全
+    public  static jvm jvm01(long time) throws InterruptedException {
+        if(instance==null) {
+            Thread.sleep(time);//延时，放大错误发生的概率
+            instance=new jvm();
+            
+        }
+            
+        return instance;
+    }
+    //线程安全
+    public static synchronized jvm jvm02(long time) throws InterruptedException {
+        if(instance==null) {
+            Thread.sleep(time);//延时，放大错误发生的概率
+            instance=new jvm();
+            
+        }
+            
+        return instance;
+        
+    }
+    
+    //使用类.class来实现同步块，因为在静态方法中不能使用this
+    public static  jvm jvm03(long time) throws InterruptedException {
+        //效率较低---需要等待
+        synchronized(jvm.class) {    if(instance==null) {
+            Thread.sleep(time);//延时，放大错误发生的概率
+            instance=new jvm();    
+            }
+        }
+            
+        return instance;
+        
+    }
+    
+    
+    public static  jvm jvm04(long time) throws InterruptedException {
+        //效率比较高，当有对象的时候，直接可以返回不需要等待
+        if(instance==null) {
+        synchronized(jvm.class) {    if(instance==null) {
+            Thread.sleep(time);//延时，放大错误发生的概率
+            instance=new jvm();    
+            }
+        }
+            
+        return instance;
+    }
+        return instance;
+        
+    }
+    
+}
+package xiancheng;
+/**
+ * 单例创建的方式
+ * 1.懒汉式
+ * 1)构造器私有化
+ * 2)声明私有的静态属性
+ * 3)对外提供访问属性的静态方法,确保对象存在
+ * @author 王思伟
+ *
+ */
+public class demo13 {
+    private static demo13 instance;
+    //构造器
+    private demo13(){
+        
+    }
+    public static synchronized demo13 getinstance() {
+        if(null==instance) {
+            instance =new demo13();
+        }
+        return instance;
+    }
+
+}
+/**
+ * 2.饿汉式
+ * 1)构造器私有化
+ * 2)声明私有的静态属性，同时创建该对象
+ * 3)对外提供访问属性的静态方法
+ *
+ */
+ class demo14 {
+     //同时创建对象
+    private static demo14 instance=new demo14();
+    //构造器
+    private demo14(){
+        
+    }
+    public static synchronized demo14 getinstance() {
+        return instance;
+    }
+}
+ /**
+  * 类在使用的时候加载,使用内部类延缓了加载时机
+  * @author 王思伟
+  *
+  */
+ class demo15{
+    private static class demo16{
+        private static demo15 instance=new demo15();
+    }
+private demo15(){
+        
+    }
+    public static synchronized demo15 getinstance() {
+        return demo16.instance;
+    }
+     
+ }
+
