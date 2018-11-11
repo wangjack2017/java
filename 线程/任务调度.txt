@@ -1,0 +1,26 @@
+任务调度：
+timer定时器
+package xiancheng;
+import java.sql.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+/**
+ * 任务调度的了解
+ * 
+ * @author 王思伟
+ *
+ */
+public class demo21 {
+    public static void main(String [] args) {
+        Timer timer=new Timer();
+        timer.schedule(new TimerTask()
+                {
+                    @Override
+                    public void run() {
+                        System.out.println("so---easy....");                        
+                    }
+            
+                }, new Date(System.currentTimeMillis()+1000));
+    }
+    
+}
