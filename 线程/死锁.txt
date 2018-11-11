@@ -1,0 +1,208 @@
+死锁：过多的同步容易造成死锁
+package xiancheng;
+/**
+ * 多线程的死锁，互相锁住条件，过多的方法同步
+ * @author 王思伟
+ *
+ */
+public class demo18 {
+    public static void main(String [] args) {
+        //线程死锁状态
+        est t1=new est();
+        est1 t2=new est1(t1.goods,t1.money);
+        Thread pro=new Thread(t1);
+        Thread pro1=new Thread(t2);
+        pro.start();
+        pro1.start();
+        
+    }
+}
+class est implements Runnable{
+    Object goods=new Object();
+    Object money=new Object();
+
+    @Override
+    public void run() {
+        while(true) {
+            tt();
+        }
+        
+        
+    }
+    public void tt() {
+        synchronized(goods){
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            synchronized(money) {
+                
+            }
+        }
+        System.out.println("一手给钱");
+    }
+    
+}
+class est1 implements Runnable{
+    Object goods;
+    Object money;
+    public est1() {
+        
+    }
+    public est1(Object goods,Object money) {
+        this.goods=goods;
+        this.money=money;
+    }
+
+    @Override
+    public void run() {
+        while(true) {
+            tt();
+        }
+        
+        
+    }
+    public void tt() {
+        synchronized(money){
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            synchronized(goods) {
+                
+            }
+        }
+        System.out.println("一手给货");
+    }
+    
+}
+解决死锁的方法：消费者生产者模式信号灯法
+package xiancheng;
+/**
+ * 解决死锁的问题
+ * 生产者消费者模式信号灯法
+ * 模拟
+ * 一个共同的场景
+ * wait（）释放锁
+ * notify()通知
+ * 与synchronized一起使用
+ * sleep（）不释放锁
+ * @author 王思伟
+ *
+ */
+public class moive {
+    /**
+     * 信号灯，当信号灯为true的时候生产者生产，消费则等待
+     * 信号灯，当信号灯为false的时候消费者消费，生产者等待
+     */
+    private boolean flag=true;
+    private String pic;
+    //播放
+    public  synchronized void play(String pic)  {
+        if(!flag) {
+            try {
+                this.wait();
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }//等待但是释放锁，生产者等待
+        }
+        //开始生产
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        this.pic=pic;
+        //通知消费
+        this.notify();
+        //停止生产
+        this.flag=false;
+    }
+    //观看
+    public synchronized void watch() {
+        if(flag) {
+            try {
+                this.wait();
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        try {
+                Thread.sleep(500);
+        } catch (InterruptedException e) {
+        
+            e.printStackTrace();
+        }
+        System.out.println(pic);
+        //消费完毕
+        //通知生产
+        this.notify();
+        //停止消费
+        this.flag=true;
+    }
+}
+package xiancheng;
+/**
+ * 生产者
+ * @author 王思伟
+ *
+ */
+public class player implements Runnable {
+    private moive m;
+    public player(moive m) {
+        this.m=m;
+    }
+    @Override
+    public void run() {
+        for(int i=0;i<20;i++) {
+            if(i%2==0) {
+                    m.play("左青龙");
+            
+            }else {
+                    m.play("右白虎");
+            }
+        }
+    }
+
+}
+package xiancheng;
+/**
+ * 消费者
+ * @author 王思伟
+ *
+ */
+public class watcher implements Runnable{
+    private moive m;
+    public watcher(moive m) {
+        this.m=m;
+        
+    }
+    @Override
+    public void run() {
+        for(int i=0;i<20;i++) {
+            m.watch();
+        }
+        
+    }
+}
+package xiancheng;
+public class app {
+    public static void main(String [] args) {
+        //共同的资源
+        moive m=new moive();
+        //多线程
+        player p=new player(m);
+        watcher w=new watcher(m);
+        Thread t1=new Thread(p);
+        Thread t2=new Thread(w);
+        t1.start();
+        t2.start();
+    }
+}
