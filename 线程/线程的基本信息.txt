@@ -1,0 +1,63 @@
+package xiancheng;
+/**
+ * Thread.currenttThread();当前线程
+ * SetName()设置名称
+ * getName()返回名称
+ * isAlive()返回此时线程的状态
+ * @author 王思伟
+ *
+ */
+public class demo7 {
+    public static void main(String [] args) throws InterruptedException {
+        demo8 wang=new demo8();
+        Thread si=new Thread(wang);
+        si.setName("wangsiweiew");
+        System.out.println(si.getName());
+        System.out.println(Thread.currentThread().getName());
+        si.start();
+        System.out.println("启动后的线程后的状态:"+si.isAlive());
+        Thread.sleep(200);
+        wang.stop();
+        Thread.sleep(200);
+        System.out.println("阻塞后的线程的状态:"+si.isAlive());
+        
+        
+        
+        
+    }
+
+}
+线程的优先级
+package xiancheng;
+/**
+ * 优先级:代表的是线程执行的概率，不是指先后顺序
+ * MAX_PRIORITY  10
+ * NORH_PRIORITY  5(默认)
+ * MIN_PRIORITY 1
+ * 设置优先级
+ * setPriority()
+ * getPriority()
+ * @author 王思伟
+ *
+ */
+public class demo9 {
+    public static void main(String [] args) throws InterruptedException {
+        
+    
+    demo8 wang=new demo8();
+    Thread si=new Thread(wang,"晓");
+    demo8 wang1=new demo8();
+    Thread si1=new Thread(wang1,"王");
+    //启动线程
+    si.setPriority(10);//设置优先级
+    si.start();
+    si1.setPriority(5);//设置优先级
+    si1.start();
+    
+    Thread.sleep(200);
+    wang.stop();
+    wang1.stop();
+    
+    }
+}
+
