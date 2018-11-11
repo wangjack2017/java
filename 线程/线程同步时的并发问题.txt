@@ -1,0 +1,102 @@
+同步：并发，多个线程访问同一份资源，我们要确保线程安全，资源安全
+synchronized--同步
+一.同步块
+synchronized(引用类型|this|类.class){
+}
+二.同步方法
+synchronized
+
+package xiancheng;
+/**
+ *
+ * @author 王思伟
+ *
+ */
+public class web12306 implements Runnable {
+    private int num=10;
+    private boolean flag=true;
+    @Override
+    public void run() {
+        // TODO Auto-generated method stub
+        while(flag) {
+            test2();
+        }
+        
+        }
+    
+    
+    /**
+     * 加入synchronized变成线程安全,synchronized相当于一把锁，
+     * 抢到的先用资源
+     */
+    public synchronized void test1() {
+        if(num<=0) {
+            flag=false;
+            return;
+        }
+        try {
+            Thread.sleep(500);//使用sleep模拟网络延迟
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        System.out.println(Thread.currentThread().getName()+"抢到了"+num--);
+    }
+    
+    
+    
+    /**
+     * synchronized的第二种用法，锁定的范围一定要正确
+     * 不正确也会出现并发
+     */
+        public void  test2() {
+            /**
+             * 括号里只能是引用类型，引用类型的范围也会和锁定的范围有关系，
+             * 也会造成线程的不安全
+             */
+            synchronized(this) { if(num<=0) {  
+                flag=false;
+                return;
+            }
+            try {
+                Thread.sleep(500);//使用sleep模拟网络延迟
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            System.out.println(Thread.currentThread().getName()+"抢到了"+num--);
+                
+            }
+        }
+       
+    //线程不安全
+    public void test() {
+        if(num<=0) {
+            flag=false;
+            return;
+        }
+        try {
+            Thread.sleep(500);//使用sleep模拟网络延迟
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        System.out.println(Thread.currentThread().getName()+"抢到了"+num--);
+    }
+    
+    public static void main(String [] args) {
+        //创建真实角色
+        web12306 wang=new web12306();
+        //创建代理角色
+        Thread s1=new Thread(wang,"王思伟");
+        Thread s2=new Thread(wang,"王晓伟");
+        Thread s3=new Thread(wang,"王大伟");
+        //启动线程
+        s3.start();
+        s2.start();
+        s1.start();
+        
+        
+    }
+
+}
