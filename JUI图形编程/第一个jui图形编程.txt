@@ -1,0 +1,47 @@
+package jus;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+/**
+ * jui图形编程
+ * 取得按钮的actionevent
+ * 1.实现actionlistener接口
+ * 2.向按钮注册----告诉他你要监听他的事件
+ * 3.事件定义处理的方法---实现接口的方法
+	监听---事件源----事件
+ *	监听：作为一个听众，工作是实现接口并向按钮注册
+ * 	事件源：身为事件源，得接受注册，取得用户事件，并在用户采取操作时调用监听的事件处理方法
+ * 	事件：事件对象，调用接口方法时会当作参数传进去，把事件信息带给监听者
+ * @author 王思伟
+ *
+ */
+public class demo1 implements ActionListener {
+    //实现此接口，表示事件只会通知有实现ActionListener的类
+    private JButton button=new JButton("click me");
+    public  void go() {
+        //创建frame，代表屏幕上的window窗口
+                JFrame frame =new JFrame();
+                //创建widge组件
+                
+                //当关闭window窗口时把程序结束掉
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                //向按钮注册
+                button.addActionListener(this);
+                //将widge组件加入到frame窗口上
+                frame.getContentPane().add(button);
+                //显示frame
+                frame.setSize(300,300);
+                frame.setVisible(true);
+    }
+    public static void main(String [] args) {
+        demo1 demo=new demo1();
+        demo.go();
+    }
+    @Override
+    //按钮会以ActionEvent为对象参数调用此方法
+    public void actionPerformed(ActionEvent e) {
+        button.setText("我已经被点过了");//改变按钮的额内容
+        
+    }
+}
