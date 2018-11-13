@@ -1,0 +1,126 @@
+package jus;
+
+import java.awt.Color;
+import java.awt.FlowLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+/**
+ * 流布局管理器：
+ * 是最常用的布局管理器
+ * 一行一行的排列，当一行排满时换下一行，各组件保持自己的大小不变
+        每一行放的组件数目随容器的大小而改变
+ * 
+ * @author 王思伟
+ *
+ */
+public class demo6 extends JFrame {
+ JButton button1=new JButton("button1");
+ JButton button2=new JButton("button2");
+ JButton button3=new JButton("button3");
+	
+ public demo6(){
+  super("FlowLayout流布局管理器");
+  this.setBounds(100,100,300,200);
+  //设置颜色
+  this.getContentPane().setBackground(Color.RED);
+  //当窗口关闭的时候，结束程序
+  this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+  this.getContentPane().setLayout(new FlowLayout() );
+  this.setSize(200, 200);
+  this.add(button1);
+  this.add(button2);
+  this.add(button3);
+  this.setVisible(true);
+ }
+ public static void main(String [] args) {
+  demo6 d=new demo6();
+ }
+}
+
+package jus;
+
+import java.awt.Color;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+/**
+ * 边布局管理器：BorderLayout
+ * 边布局管理器包括东南西北中间五部分，随着容器大小的改变，东南西北四条边的长度或宽度保持不变，
+    中间长度的大小受容器的大小而改变
+ * @author 王思伟
+ *
+ */
+public class demo7 extends JFrame{
+    
+    JButton button1=new JButton("button_west");
+    JButton button2=new JButton("button_east");
+    JButton button3=new JButton("button1_north");
+    JButton button4=new JButton("button1_south");
+    JButton button5=new JButton("button1_center");
+    public demo7(){
+        super("边布局管理器");
+        this.setBounds(100, 100, 500, 200);
+        this.getContentPane().setBackground(Color.YELLOW);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        //框架组件默认为边布局管理器
+        this.getContentPane().add(button1,"West");
+        this.getContentPane().add(button2,"East");
+        this.getContentPane().add(button3,"North");
+        this.getContentPane().add(button4,"South");
+        this.getContentPane().add(button5,"Center");
+        this.setSize(200,200);
+        this.setVisible(true);
+    }
+    public static void main(String [] args) {
+        demo7 de=new demo7();
+        
+    }
+    
+
+}
+
+package jus;
+import java.awt.Color;
+import java.awt.GridLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+/**
+ * 网格布局管理器
+ * 网格布局管理器将容器划分为若干行乘若干列
+ * 组件大小随容器尺寸的改变而改变
+ * @author 王思伟
+ *
+ */
+
+public class demo8 extends JFrame{
+    JButton button1=new JButton("留言");
+    JButton button2=new JButton("评论");
+    JLabel lab1=new JLabel("用户名",JButton.CENTER);
+    JLabel lab2=new JLabel("密码",JButton.CENTER);
+    JTextField login=new JTextField(12);
+    JPasswordField pass=new JPasswordField (10);
+    public demo8() {
+        super("网格布局管理器");
+        this.getContentPane().setBackground(Color.RED);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.getContentPane().setLayout(new GridLayout(3,2));
+        this.add(lab1);
+        this.add(login);
+        this.add(lab2);
+        this.add(pass);
+        this.add(button1);
+        this.add(button2);
+        this.setSize(500,500);
+        this.setVisible(true);
+        
+    }
+    public static void main(String [] args) {
+        demo8 de=new demo8();
+    }
+
+}
