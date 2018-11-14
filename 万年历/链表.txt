@@ -1,0 +1,149 @@
+/**
+*作者：王思伟
+*/
+#include"iostream"
+#include"stdio.h"
+#include"stdlib.h"
+/********************创建链表结构体************/
+struct node {
+	char name[10];
+	int score;
+	struct node *next;
+};
+/*************使用尾插法创建链表***************/
+void create(node *phead,int n) {
+	node *p;
+	int i;
+	for (i = 0; i < n;i++) {
+	p = (node*)malloc(sizeof(node));
+	phead->next = p;
+	p->next = NULL;
+	phead = p;
+	}
+}
+/************使用头插法创建链表****************/
+void createt(node *phead,int n) {
+	node *p;
+	int i;
+	for (i = 0; i < n;i++) {
+	p = (node*)malloc(sizeof(node));
+	p->next = phead->next;
+	phead->next = p;
+	}
+
+}
+/**************返回链表的长度******************/
+int retunc(node *phead) {
+	node *p;
+	int i = 0;
+	p = phead->next;
+	while (p!=NULL) {
+	i++;
+	p = p->next;
+	}
+	return i;
+}
+/**************链表的增加*******************/
+void add(node *phead,int i) {
+	int k= retunc(phead);
+	node *p = phead;
+	int j,a;
+	if (i > k || i <=0)
+		printf("添加失败");
+	if(i<= k&&i>0){
+	for (j = 1; j < i; j++) {
+	p = p->next;
+	}
+	node *q = (node*)malloc(sizeof(node));
+	q->next = p->next;
+	p->next = q;
+	printf("请输入名字\n");
+	gets_s(q->name);
+	gets_s(q->name);
+	printf("请输入成绩\n");
+	scanf_s("%d", &q->score);
+	}
+}
+/**************给链表加数据******************/
+void write(node *phead) {
+	int i = retunc(phead);
+	int j;
+	node *q = phead->next;
+	for (j = 0; j < i;j++) {
+	printf("请输入名字\n");
+	gets_s(q->name);
+	gets_s(q->name);
+	printf("请输入成绩\n");
+	scanf_s("%d", &q->score);
+	q = q->next;
+	}
+
+}
+/***************遍历链表*****************/
+void bianli(node *phead) {
+	int i;
+	node *p = phead->next;
+	while (p != NULL) {
+	printf("%9s%3d\n",p->name,p->score);
+	p = p->next;
+	}
+}
+/******************删除节点*******************/
+void Delete(node *phead,int i) {
+	int k = retunc(phead);
+	int j;
+	if (i > k || i <= 0)
+		printf("添加失败");
+	node *q = phead->next;
+	if (i == k) {
+	for (j = 1; j < k - 1;j++) {
+		q = q->next;
+	}
+	q->next = NULL;
+	}
+	else {
+	for (j = 1; j < i-1; j++) {
+	q = q->next;
+	}
+	q->next = q->next->next;
+
+	}
+
+}
+/***************修改链表*****************/
+void change(node *phead,int i) {
+	node *p;
+	p = phead->next;
+	int k = retunc(phead);
+	int j;
+	if (i > k || i <= 0)
+		printf("修改失败");
+	if (i <= k && i>0) {
+		for (j = 1; j < i; j++){
+		p = p->next;
+		}
+	printf("输入要修改的名字\n");
+	gets_s(p->name);
+	gets_s(p->name);
+	printf("请输入修改的成绩\n");
+	scanf_s("%d",&p->score);
+	}
+}
+int main() {
+	node *phead;
+	phead = (node*)malloc(sizeof(node));
+	phead->next = NULL;
+	createt(phead, 5);
+	write(phead);
+	bianli(phead);
+	add(phead, 2);
+	bianli(phead);
+	Delete(phead, 2);
+	printf("*************\n");
+	bianli(phead);
+	change(phead,3);
+	printf("*************\n");
+	bianli(phead);
+	system("pause");
+	return 0;
+}
