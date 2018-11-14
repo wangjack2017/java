@@ -1,0 +1,41 @@
+package jus;
+
+import java.awt.*;
+import javax.swing.*;
+
+/**
+ * 组件标签的相关操作
+ * @author 王思伟
+ *
+ */
+public class demo11 extends JFrame {
+    //创建标签
+    JLabel lab1=new JLabel("我将要参加java程序设计的考试");
+    JLabel lab2=new JLabel();
+    public demo11() {
+    //设置窗体的布局
+    this.setLayout(new FlowLayout());
+    //设置标签透可明
+    lab1.setOpaque(true);
+    lab2.setOpaque(true);
+    //添加两个标签
+    this.getContentPane().add(lab1);
+    this.getContentPane().add(lab2);
+    //将标签1的信息复制到标签2
+    lab2.setText(lab1.getText()+"希望自己取得好成绩");
+    //设置标签背景颜色
+    lab1.setBackground(Color.red);
+    lab2.setBackground(Color.pink);
+    //设置标签的前景颜色
+    lab1.setForeground(Color.BLUE);
+    lab2.setForeground(Color.LIGHT_GRAY);
+    this.setSize(200, 200);
+    this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+    this.setVisible(true);
+    }
+    public static void main(String [] args) {
+        new demo11();
+        
+    }
+
+}
