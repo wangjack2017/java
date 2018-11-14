@@ -1,0 +1,32 @@
+package jus;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+/**
+ * 用borderlayout实现改变窗体的颜色的改变
+ * @author 王思伟
+ *
+ */
+public class demo12  extends JFrame implements ActionListener{
+    JButton button1=new JButton("改变颜色");
+    public demo12() {
+        this.setSize(300,300);
+        this.setTitle("颜色的改变窗口");
+        //编译器默认为边布局管理器
+        this.getContentPane().setBackground(Color.BLUE);
+        button1.addActionListener(this);
+        this.getContentPane().add(button1,"South");
+        this.setVisible(true);
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // TODO Auto-generated method stub
+        this.getContentPane().setBackground(Color.red);
+        
+    }
+    public static void main(String [] args) {
+        new demo12();
+        
+    }
+}
