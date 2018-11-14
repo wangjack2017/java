@@ -1,0 +1,46 @@
+package jus;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+/**
+ * 实现一个窗口跳转到另一个窗口
+ * @author 王思伟
+ *
+ */
+public class demo10 extends JFrame implements ActionListener{
+    JButton button1=new JButton("click me");
+    public demo10() {
+        super("开始的界面");
+        this.setTitle("开始的界面");
+        this.setSize(200,200);
+        this.getContentPane().setBackground(Color.LIGHT_GRAY);
+        button1.addActionListener(this);//向按钮注册
+        this.getContentPane().add(button1);
+        this.setVisible(true);
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // TODO Auto-generated method stub
+        //改变行为
+        this.setVisible(false);
+        new frame();
+    }
+    public static void main(String [] args) {
+        new demo10();
+        
+    }
+}
+//新的界面类
+class frame extends JFrame{
+    JButton button1=new JButton("登陆成功");
+    public frame() {
+        super("一个新的界面来了！！！！");
+        this.setSize(200,200);
+        this.getContentPane().setBackground(Color.GRAY);
+        this.getContentPane().add(button1);
+        this.setVisible(true);
+    }
+}
