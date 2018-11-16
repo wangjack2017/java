@@ -1,0 +1,50 @@
+package jus;
+import java.awt.*;
+import javax.swing.*;
+/**
+ * 使用JPanel类在容器上实现自己的绘图组件
+ * 需要重写paintComponent()方法，不需要自己调用
+ * 借助画图类graphicsgraphics2d，子类graphics2d，方法比父类多一点
+ * 如果要调用Graphicszd  g,要将graphics g下转型为Graphicszd g
+ * 实现颜色渐层改变的一个类GradientPaint
+ * @author 王思伟
+ *
+ */
+public class demo14 extends JPanel {
+    //重写paintComponent()方法，不用自己调用，由系统来调用
+    /*public void paintComponent(Graphics g) {
+        g.setColor(Color.GREEN);
+        g.fillRect(20,50, 100,100);
+    }*/
+    //画一个椭圆，产生随机颜色
+    /*public void paintComponent(Graphics g) {
+        //设定面板大小
+        g.fillRect(0, 0, this.getWidth(), this.getHeight());
+        //设定三个随机数
+        int red=(int)(Math.random()*255);
+        int green=(int)(Math.random()*255);
+        int blue=(int)(Math.random()*255);
+        //产生随机颜色
+        Color randomolor=new Color(red,green,blue);
+        g.setColor(randomolor);
+        //设定椭圆的坐标及大小
+        g.fillOval(70, 70,100, 100);
+    }*/
+    //渐层颜色的实现,此时需要将graphics g下转型为Graphicszd g
+    public void paintComponent(Graphics g) {
+        g.fillRect(0, 0, this.getWidth(), this.getHeight());
+        Graphics2D g2d=(Graphics2D) g;
+        //实现颜色改变的一个类
+        GradientPaint gradient =new GradientPaint(70,70,Color.BLUE,150,150,Color.orange);
+        g2d.setPaint(gradient);
+        g2d.fillOval(70, 70, 100, 100);
+    }
+    public static void main(String [] args) {
+        JFrame frame=new JFrame();
+        demo14 demo=new demo14();
+        frame.getContentPane().add(demo);
+        frame.setSize(500,500);
+        frame.getContentPane().setBackground(Color.gray);
+        frame.setVisible(true);
+    }
+}
