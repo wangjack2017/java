@@ -1,0 +1,65 @@
+package jus;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+/**
+ * 通过内部类来监听多个按钮组件
+ * @author 王思伟
+ *
+ */
+public class demo16 {
+    JFrame frame;
+    JLabel label;
+    
+    public static void main(String [] args) {
+        demo16 gui=new demo16();
+        gui.go();
+        
+    }
+    public void go() {
+        frame=new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JButton labelbutton=new JButton("change label");
+        labelbutton.addActionListener(this.new labellistener() );
+        JButton colorbutton=new JButton("change circle");
+        colorbutton.addActionListener(this.new colorlistener());
+        
+        label= new JLabel("I love you");
+        mydraw draw=new mydraw();
+        frame.getContentPane().add(draw,"Center");
+        frame.getContentPane().add(colorbutton,"South");
+        frame.getContentPane().add(labelbutton,"East");
+        frame.getContentPane().add(label,"West");
+        frame.setSize(500, 500);
+        frame.setVisible(true);
+    }
+    class labellistener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            label.setText("王思伟好棒！");
+        }
+    }
+    class colorlistener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            frame.repaint();
+        }
+        
+    }
+}
+class mydraw extends JPanel{
+    public void paintComponent(Graphics g) {
+        g.fillRect(0, 0, this.getWidth(), this.getHeight());
+        //设置随机颜色的参数
+        int red=(int)(Math.random()*225);
+        int green=(int)(Math.random()*225);
+        int black=(int)(Math.random()*225);
+        Color randomcolor=new Color(red,green,black);
+        //下转型为子类
+        Graphics2D g2d=(Graphics2D) g;
+        g2d.setColor(randomcolor);
+        g2d.fillOval(70, 70, 100, 100);
+    }
+    
+}
