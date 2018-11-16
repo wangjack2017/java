@@ -1,0 +1,49 @@
+package jus;
+import java.awt.Color;
+import java.awt.Graphics;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+/**
+ * 使用内部类实现动画效果
+ * 
+ * @author 王思伟
+ *
+ */
+public class demo17 {
+    private int x=70;
+    private int y=70;
+    public static void main(String [] args) {
+        demo17 demo=new demo17();
+        demo.go();
+    }
+    public void go() {
+        JFrame frame=new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mydraw draw=new mydraw();
+        frame.getContentPane().add(draw);
+        frame.setSize(500, 500);
+        frame.setVisible(true);
+        for(int i=0;i<130;i++) {
+            x++;
+            y++;
+            frame.repaint();
+            try {
+                Thread.sleep(50);
+            }catch(Exception e) {
+                e.printStackTrace();
+            }
+            
+        }
+    }
+    
+    class mydraw extends JPanel{
+        public void paintComponent(Graphics g) {
+           g.setColor(Color.WHITE);
+           g.fillRect(0, 0, this.getWidth(),this.getHeight());
+           g.setColor(Color.GREEN);
+           g.fillOval(x, y, 100, 100);
+            
+        }
+        
+    }
+}
