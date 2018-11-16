@@ -1,0 +1,50 @@
+package jus;
+
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+/**
+ * 对多个按钮注册同一个监听口
+ * 使用事件对象中的方法getsource()方法得到具体的事件源
+ * @author 王思伟
+ *
+ */
+public class demo13 extends JFrame implements ActionListener {
+ JButton button1=new JButton("yellow");
+ JButton button2=new JButton("red");
+ JButton button3=new JButton("blue");
+ private Color backgroundcolor;
+ public demo13(Color c) {
+  backgroundcolor=c;
+  this.setSize(300,300);
+  this.getContentPane().setLayout(new FlowLayout());
+  this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+  button1.addActionListener(this);
+  button2.addActionListener(this);
+  button3.addActionListener(this);
+  this.getContentPane().add(button1);
+  this.getContentPane().add(button2);
+  this.getContentPane().add(button3);
+  this.setVisible(true);
+ }
+ @Override
+ public void actionPerformed(ActionEvent e) {
+  if(e.getSource()==button1) {
+   button1.setBackground(Color.LIGHT_GRAY);
+  }else if(e.getSource()==button2) {
+   button2.setBackground(Color.orange);
+  }else {
+   button3.setBackground(Color.PINK);
+  }
+ }
+ public static void main(String [] args) {
+  new demo13(Color.BLACK);
+  
+ }
+
+}
