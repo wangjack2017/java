@@ -1,0 +1,18 @@
+package jus;
+/**
+ * 通过内部类与内部类
+ * @author 王思伟
+ *
+ */
+public class demo16 {
+	class wang{
+		
+	}
+	public static void main(String [] args) {
+		demo16 d=new demo16();
+		//通过外部类的实例对象来创建内部类
+		d.new wang();
+		
+	}
+
+}
