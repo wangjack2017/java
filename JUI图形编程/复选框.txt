@@ -1,0 +1,36 @@
+package jus;
+import java.awt.*;
+import javax.swing.*;
+
+/**
+ * 复选框的使用
+ * @author 王思伟
+ *
+ */
+public class demo22 {
+	public static void main(String [] args) {
+		EventQueue.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				JFrame frame=new JFrame();
+				JCheckBox box=new JCheckBox("bord");
+				JCheckBox box1=new JCheckBox("wang");
+				JCheckBox box2=new JCheckBox("si");
+				JCheckBox box3=new JCheckBox("wei");
+				frame.add(box);
+				frame.add(box1);
+				frame.add(box2);
+				frame.add(box3);
+				frame.setLayout(new FlowLayout());
+				frame.setSize(500,500);
+				//将窗口最小化
+				frame.pack();
+				frame.setVisible(true);
+			}
+			});
+		
+		}
+
+
+}
