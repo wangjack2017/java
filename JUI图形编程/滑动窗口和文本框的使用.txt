@@ -1,0 +1,51 @@
+package jus;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+/**
+ * 滑动窗口及在文本框显示登录名和密码
+ * 滑动窗口类
+ * JScrollPane scrollpane=new JScrollPane(textarea);
+ * @author 王思伟
+ *
+ */
+public class demo21  extends JFrame{
+    public demo21() {
+        JTextField textfield=new JTextField();
+        JPasswordField password=new JPasswordField();
+        this.setSize(500, 500);
+        
+        JPanel panel=new JPanel();
+        panel.setLayout(new GridLayout(2,2));
+        panel.add(new JLabel("user name",SwingConstants.RIGHT));
+        panel.add(textfield);
+        panel.add(new JLabel("password",SwingConstants.RIGHT));
+        panel.add(password);
+        this.getContentPane().add(panel,"North");
+        JTextArea textarea=new JTextArea(8,10);
+        //滑动窗口的创建,创建对象时将文本框架加入到滑动窗口
+        JScrollPane scrollpane=new JScrollPane(textarea);
+        
+        
+        this.add(scrollpane,"Center");
+        JButton button=new JButton("Insert");
+        JPanel panel1=new JPanel();
+        panel1.add(button);
+        this.add(panel1,"South");
+        //内部类向按钮注册和监听
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textarea.append("user name:"+textfield.getText()+"password:"+new String(password.getPassword()));
+            }
+        });
+        this.setVisible(true);
+        
+        
+    }
+    public static void main(String [] args) {
+        new demo21();
+        
+    }
+}
