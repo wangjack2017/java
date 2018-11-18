@@ -1,0 +1,47 @@
+package jus;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+/**
+ * 组合框
+ * JComboBox<String> 
+ * getSelectedIndex()返回当前选项的位置
+ * getItemAt(int dex)通过位置返回当前的选项
+ * getSelectedItem()返回当前的选项
+ * @author 王思伟
+ *
+ */
+public class demo25 extends JFrame{
+    private JComboBox<String> facecombo;
+    private JLabel lab;
+    public demo25() {
+        lab=new JLabel("wangsiwei");
+        //设置标签的颜色
+        lab.setFont(new Font("setjdj",Font.PLAIN,24));
+        this.add(lab,BorderLayout.CENTER);
+        //创建一个组合框
+        facecombo=new JComboBox<>();
+        facecombo.addItem("wangsiwei");
+        facecombo.addItem("wangsiwei1");
+        facecombo.addItem("wangsiwei2");
+        facecombo.addItem("wangsiwei3");
+        facecombo.addItem("wangsiwei4");
+        facecombo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                lab.setFont(new Font(facecombo.getItemAt(facecombo.getSelectedIndex()),Font.PLAIN,24));
+                facecombo.getSelectedItem()
+            }
+        });
+        JPanel panel=new JPanel();
+        panel.add(facecombo);
+        this.add(panel,"South");
+        this.setSize(500,500);
+        this.setVisible(true);
+    }
+    public static void main(String [] args) {
+        new demo25();
+        
+    }
+}
