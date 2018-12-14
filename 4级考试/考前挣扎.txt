@@ -1,0 +1,151 @@
+交通类：
+travel agency 旅行社
+　　flight number 航班号
+　　check in 办理登机手续
+　　motel 汽车旅馆
+　　book the ticket 订票
+　　platform 站台
+　　hiking 徒步旅行
+　　hitch-hike 搭便车旅行
+　　conductor 列车长
+　　skiing 滑雪
+　　travellers check 旅行支票
+　　sneaker 胶底运动鞋
+　　streetcar 有轨电车
+　　mineral bath 矿泉浴
+　　resort 度假胜地
+　　visa 签证
+　　express train 特快列车
+　　shuttle 短程穿梭航班(班车，火车)
+　　ferry 渡船，摆渡
+　　tube/underground 地铁
+　　expressway/freeway 高速公路
+	　round trip 往返旅行
+
+经济类：
+accelerate vt (使)加速，增速
+例：accelerate the rate of economic growth加速经济增长
+派：acceleration n 加速accelerating a 加速的
+boost vt 提高，推动，使增长n 推动，增长
+例：boost the economy推动经济增长
+派：booster n 支持者，推动器
+mushroom vi 迅速成长n蘑菇
+例：sth Mushroom …快速成长/增加
+flourish vi 繁荣，茂盛; vt挥动
+例：the nation’s economy willflourish国家经济将繁荣发展
+thrive vi 兴旺，繁荣
+例：The company managed to thrive after a recession经济衰退后该公司设法兴旺起来
+impose vt 把…强加于; 征税
+考：impose on/upon把…强加于
+例：to impose local tax征收地方税
+派：imposing a 壮观的，令人难忘的
+restore vt 恢复，修复;归还，交还
+例： restore the economy to full strength完全恢复经济发展
+派：restoration n 修复
+revive v 使复苏vi恢复
+例：The economy of these areas is beginning to revive这些地方的经济开始复苏
+soar vi 猛增，高飞;(情绪)高涨
+例：Oil prices have soared in recent weeks石油价格最近几周飚升
+squeeze vt 挤，压榨;n拮据，紧缺;握手
+例：financial squeeze财政困难
+exceed vt 超过，越出
+例：The benefits exceed $10 million利润超过1千万美元
+派：exceeding a 超过的;exceedingly ad 非常
+allocate vt 分配， 把…拨给
+例：allocate money for the project给项目拨款
+派：allocation n 配给，分配
+slash vt 砍;大量削减;n 砍，斜线号
+考：slashed red tape革除繁文缛节
+例：slash fares by about 30% 削减票价30%
+negotiate vt 洽谈;顺利通过vi协商
+例：to negotiate the cooperation items谈判公司项目
+派：negotiation n 谈判negotiable a 可协商的
+distribute vt分发，分配;散布
+例：Milk has been distributed to the local shops牛奶已经分发到当地商店
+派：distribution n 分发;distributed a 分布的
+distributor n 发行人
+substantial a 大量的，结实的;实质的;
+例：substantial investment大笔投资
+bankrupt a 破产的，彻底缺乏的，v 使破产n 破产者
+例：the bankrupt oil company破产的石油公司
+派：bankruptcy n 破产
+economy n 经济，经济情况;省俭，充分利用
+例：the market economy市场经济
+派：economize v 节俭economic a 经济学的
+prosperity n 繁荣，兴旺
+例：economic prosperity经济繁荣
+例：prosperous a 繁荣的
+constraint n 约束;限制
+例：economic and cultural constraint经济文化制约
+hardship n 艰难，困苦
+例：economic hardships经济困难
+recession n 衰退(期)
+例：economic recession经济衰退
+budget n 预算vi 做安排vt 规划a 收费公路
+例：annual budget每年的预算
+corporation n 公司
+例：multinational corporation跨国公司
+entrepreneur n 企业家
+例：a young property entrepreneur年轻的地产企业家
+commission n 委员会;佣金，回扣;
+例：The salesman takes a 5% commission on the sales he makes推销员得到他销售额5%的佣金
+派：commissioner n 委员
+installment n 分期付款;(分期连载)部分
+例：the installment plans分期付款计划
+warranty n 担保书，证书，保单
+例：The warranty expires tomorrow 担保书明天到期
+venture n 风险投资，(商业)风险项目;vi冒险
+例：a joint venture合资企业
+派：venturesome a 好冒险的
+食物类：
+1. bake vat.烤，烘，焙
+　　2. cabin n.小屋;船舱，机舱
+　　3. cabinet n.橱，柜;内阁
+　　4. cafeteria n.自助食堂
+　　5. can n.罐头，听头;容器
+　　6. canteen n.小卖部;临时餐室
+　　7. cherry n.樱桃;樱桃树
+　　8. core n.果实的心，核心
+　　9. corn n.谷物;(英)小麦
+　　10. crop n.农作物，庄稼;一熟
+　　11. crust n.面包皮;硬外皮
+　　12. cupboard n.碗柜，碗碟橱;食橱
+　　13. flour n.面粉，粉;粉状物质
+　　14. fork n.餐叉;叉;分叉
+　　15. grape n.葡萄;葡萄藤
+　　16. loaf n.一条面包，一个面包
+　　17. odor n.气味，香气;味道
+　　18. pail n.桶，提桶
+　　19. pan n.平底锅，盘子
+　　20. peel vat.剥(皮)，削(皮)
+　　21. perfume n.香味，芳香;香料
+　　22. pot n.锅，壶，罐，盆
+　　23. sauce n.调味汁，酱汁
+　　24. saucer n.茶托，浅碟
+　　25. sausage n.香肠，腊肠
+　　26. soda n.碳酸钠，纯碱;汽水
+　　27. spoon n.匙，调羹
+　　28. whisky n.威士忌酒
+艺术类：
+1. artistic a.艺术的;艺术家的
+　　2. author n.作者，作家
+　　3. craft n.工艺;手艺，行业无效 vi.碰撞，坠落 n.碰撞
+　　4. feast n.盛宴，筵席;节日
+　　5. jazz n.爵士音乐，爵士舞曲
+　　6. keyboard n.键盘
+　　7. opera n.歌剧
+　　8. orchestra n.管弦乐队
+　　9. organ n.器官;机构;管风琴
+　　10. pause n.&vi.中止，暂停
+　　11. photograph n.照片，相片
+　　12. photographic a.摄影的，摄影用的
+　　13. portrait n.肖像，画像
+　　14. program n.节目单;大纲;程序
+　　15. rhythm n.韵律，格律;节奏
+　　16. scenery n.舞台布景;风景
+　　17. skilled a.有技能的，熟练的
+　　18. skillful a.灵巧的，娴熟的
+　　19. skim vat.掠过，擦过;略读
+　　20. tone n.音;腔调;声调
+　　21. tragedy n.悲剧;惨事，惨案
+　　22. tune n.调子;和谐 vat.调谐
