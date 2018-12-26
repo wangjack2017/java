@@ -1,0 +1,40 @@
+package jus;
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+/**
+ * 登陆窗口并输出账号和密码
+ * @author 王思伟
+ *
+ */
+public class demo41 extends JFrame implements ActionListener{
+	private JTextField name=new JTextField(10);
+	private JPasswordField password=new JPasswordField(10);
+	private JLabel lab1=new JLabel("用户名");
+	private JLabel lab2=new JLabel("密码");
+	private JLabel lab3=new JLabel();
+	private JLabel lab4=new JLabel();
+	demo41(){
+		this.setSize(200,200);
+		this.getContentPane().setLayout(new GridLayout(3,2));
+		this.add(lab1);
+		this.add(name);
+		this.add(lab2);
+		password.addActionListener(this);
+		this.add(password);
+		this.add(lab3);
+		this.add(lab4);
+		this.setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		lab3.setText("用户名:"+name.getText().toString());
+		lab4.setText("密码:"+new String(password.getPassword()));
+		
+	}
+	public static void main(String [] args) {
+		new demo41();
+	}
+
+}
