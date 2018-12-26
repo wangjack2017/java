@@ -1,0 +1,103 @@
+//创建一个表
+create table student1(
+no int,
+dname varchar(10),
+score int
+);
+//创建第二个表
+create table student22(
+no int,
+gender varchar(10),
+phone int
+);
+insert into student1 values(1,'王思伟',100);
+insert into student1 values(2,'王晓伟',95);
+insert into student1 values(3,'王二伟',98);
+insert into student22 values(1,'男',1874);
+insert into student22 values(2,'女',1875);
+insert into student22 values(3,'男',1876);
+内连接
+select *from student1,student22 where student1.no=student22.no;
+
+增加检查约束
+alter table student1 
+add gender varchar(10)
+check(gender='男'or gender='女');
+ 
+修改某一列的类型
+alter table student1
+alter column dname varchar(10) not null;
+增加一个主键约束,增加主键约束的那一列不能为空
+alter table student1
+add primary key(dname)
+增加列
+alter table student1 add age int;
+删除列
+alter table student1 drop column age;
+
+创建数据库
+create database mydb1
+on(
+name=mydb1_123,
+filename='C:\Program Files\Microsoft SQL Server\MSSQL11.SQL2012\MSSQL\DATA\mydb1_123',
+size=50mb,
+maxsize=1gb,
+filegrowth=50%
+),
+(
+name=mydb_123,
+filename='C:\Program Files\Microsoft SQL Server\MSSQL11.SQL2012\MSSQL\DATA\mydb_123.ndf',
+size=50mb,
+maxsize=unlimited,
+filegrowth=5mb
+);
+ 
+创建登陆账号
+create login wangsiwei
+with password='123456',
+default_database=mydb1;
+
+修改密码
+alter login wangsiwei
+with password='751612'
+删除登陆
+drop login wangsiwei;
+创建数据库用户
+use mydb1
+go
+create user xiaowang
+from login wangsiwei
+with default_schema=dbo;
+//删除用户
+drop user xiaowang;
+创建架构
+create schema qq
+authorization xiaowang;
+删除架构
+drop schema qq;
+
+对于对象
+权限的授予
+grant create table to xiaowang;
+收回权限
+revoke create table from xiaowang;
+对于语句的权限
+授予权限
+grant select on student1 to xiaowang;
+收回权限
+revoke select on student1 to xiaowang;
+
+事务
+create table student1(
+no int,
+dname varchar(10),
+score int
+);
+开始事务
+begin transaction
+insert into student1 values(4,'王五',75);
+save transaction sp1;
+insert into student1 values(5,'王二',85);
+rollback transaction sp1;
+commit transaction;
+结束事务
