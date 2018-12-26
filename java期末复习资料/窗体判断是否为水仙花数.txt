@@ -1,0 +1,51 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+/**
+ * 输入一个数判断是否为水仙花数
+ * @author dell
+ *
+ */
+public class test1 extends JFrame implements ActionListener{
+	
+	private JTextField text =new JTextField(6);
+	private JLabel lab=new JLabel();
+	test1(){
+		this.setSize(200,200);
+		this.setLayout(new FlowLayout());
+		text.addActionListener(this);
+		this.add(text);
+		this.add(lab);
+		this.setVisible(true);
+		
+		
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		int si=new Integer(text.getText().toString());
+		int x=si/100;
+		int y=si%10;
+		int z=si%100/10;
+		if(si>999)
+			lab.setText(si+"不是漂亮的水仙花数");
+		else{
+			if(si==x*x*x+y*y*y+z*z*z){
+				lab.setText(si+"是漂亮的水仙花数");
+			}
+			else{
+				lab.setText(si+"不是漂亮的水仙花数");
+			}
+		}
+		
+	}
+	
+	public static void main(String [] args){
+		new test1();
+	}
+
+
+
+
+	
+
+}
