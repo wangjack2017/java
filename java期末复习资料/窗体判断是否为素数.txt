@@ -1,0 +1,42 @@
+package jus;
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+/**
+ * 通过窗体判断是否为一个素数
+ * @author 王思伟
+ *
+ */
+public class demo40 extends JFrame implements ActionListener{
+	private JTextField text=new JTextField(6);
+	private JLabel lab=new JLabel();
+	demo40(){
+		this.setSize(200,200);
+		this.setLayout(new FlowLayout());
+		text.addActionListener(this);
+		
+		this.add(text);
+		this.add(lab);
+		this.setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		int si= new Integer(text.getText().toString());
+		int i;
+		if(si==2)
+			lab.setText(si+"是一个漂亮的素数");
+		for(i=3;i<=si;i++) {
+			if(si%i==0) {
+				lab.setText(si+"不是一个漂亮的素数");
+				break;
+			}
+		}
+		if(i==si+1)
+			lab.setText(si+"是一个漂亮的素数");
+	}
+
+	public static void main(String [] args) {
+		new demo40();
+	}
+}
