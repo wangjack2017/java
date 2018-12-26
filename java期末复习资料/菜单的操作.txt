@@ -1,0 +1,50 @@
+import javax.swing.*;
+import java.awt.*;
+/**
+ * 菜单的操作
+ * @author 王思伟
+ *
+ */
+public class test1 {
+	private JFrame f;//定义一个窗体
+	private JMenuBar bar;//定义一个菜单栏
+	private JMenu file,edit;//两个菜单
+	private JMenuItem item1,item2,item3,item4,
+	item5,item6,item7,item8;//定义八个菜单项
+	test1(){
+		f=new JFrame();
+		f.setSize(300,300);
+		f.setLayout(new FlowLayout());
+		bar=new JMenuBar();
+		file=new JMenu("文件");
+		edit=new JMenu("编辑");
+		item1=new JMenuItem("1");
+		item2=new JMenuItem("2");
+		item3=new JMenuItem("3");
+		item4=new JMenuItem("4");
+		item5=new JMenuItem("5");
+		item6=new JMenuItem("6");
+		item7=new JMenuItem("7");
+		item8=new JMenuItem("8");
+		bar.add(file);
+		bar.add(edit);
+		f.add(bar);
+		file.add(item1);
+		file.add(item2);
+		file.add(item3);
+		file.add(item4);
+		edit.add(item5);
+		edit.add(item6);
+		edit.add(item7);
+		edit.add(item8);
+		f.setVisible(true);
+	}
+	
+	
+	
+	
+	public static void main(String [] args){
+		new test1();
+	}
+
+}
