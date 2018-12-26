@@ -1,0 +1,35 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+/**
+ * 随机改变颜色
+ * @author dell
+ *
+ */
+public class test1 extends JFrame implements ActionListener{
+	
+	private JButton button=new JButton("改变颜色");
+	test1(){
+		this.setSize(200,200);
+		button.addActionListener(this);
+		this.add(button,"South");
+		this.setVisible(true);
+		
+		
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+	
+		int red=(int)(Math.random()*255);
+		int green=(int)(Math.random()*255);
+		int blue=(int)(Math.random()*255);
+		Color color=new Color(red,green,blue);
+		this.getContentPane().setBackground(color);
+		
+	}
+	
+	public static void main(String [] args){
+		new test1();
+	}
+
