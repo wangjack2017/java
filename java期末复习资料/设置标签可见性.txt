@@ -1,38 +1,32 @@
 package jus;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 /**
- * 复数
+ * 标签设置可见不可见
  * @author 王思伟
  *
  */
-public class demo32 {
-	private double w;//表示虚部
-	private double r;//表示实部
-	demo32(double r){//虚部为0
-		this.r=r;
-		w=0;
+public class demo33 extends JFrame implements ActionListener {
+
+	private JButton button=new JButton ("设置标签");
+	private JLabel lab=new JLabel("标签出现");
+	
+	demo33(){
+		this.setSize(300,300);
+		this.setLayout(new FlowLayout());
+		this.add(lab);
+		button.addActionListener(this);
+		this.add(button);
+		this.setVisible(true);
 	}
-	demo32(double r,double i){//实部和虚部都存在
-		this.r=r;
-		this.w=i;
-		
-	}
-	void add(double r,double i) {
-		this.r=this.r+r;
-		this.w=this.w+i;
-	}
-	void diplay() {//打印复数
-		System.out.println(this.r+"+"+this.w+"i");
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		lab.setVisible(!lab.isVisible());//改变标签的可见性
 	}
 	public static void main(String [] args) {
-	demo32 wang=new demo32(3,2);//虚部不为0的
-	wang.add(4,3);
-	wang.diplay();
-	demo32 si=new demo32(5);//虚部为0
-	si.add(7,3);
-	si.diplay();
+		new demo33();
+		
 	}
+
 }
-
-
-
-
