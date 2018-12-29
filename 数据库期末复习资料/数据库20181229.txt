@@ -1,0 +1,91 @@
+//创建数据库
+create database mydb
+on
+(
+	name=data1,
+	filename='c:\data1.mdf',
+	size=2mb,
+	maxsize=50mb,
+	filegrowth=10%
+);
+//创建登陆账号
+create login user1
+with password='123',
+default_database=mydb;
+//在数据库中创建数据库用户账号对应登录账号user1
+use mydb
+go
+create user user2
+from login user1
+with default_schema=dbo;
+//创建架构
+create schema qq
+authorization user2;
+drop schema qq;
+//删除数据库用户
+drop user user2;
+//对用户账号进行创建授权
+grant create table to user2;
+//对用户账号进行创建收回权限
+revoke create table from user2;
+//对用户账号进行数据操作授权
+grant select on emp to user2;
+//对用户账号进行数据操作收回权限
+revoke select on emp from user2;
+//创建两个表emp,dept
+create table emp(
+eno varchar(10) primary key,
+enome varchar(10),
+age int ,
+deptid int
+);
+create table dept(
+deptid int primary key,
+depname varchar(10)
+);
+//给两个表分别插入两个数据
+insert into emp values('1701','王思伟',20,2001);
+insert into emp values('1702','王晓伟',24,2002);
+insert into dept values(2001,'投资部');
+insert into dept values(2002,'财务部');
+//对表进行插入一列
+alter table emp add salary int;
+//对表增加一个主键约束
+alter table emp add primary key (enome);
+//修改某一列的类型
+alter table emp 
+alter column eno int ;
+//删除一列
+alter table emp drop column age;
+//增加检查约束
+alter table emp add eno varchar(10)
+check(eno='1701'or eno='1702')
+//查询年龄小于25
+select eno,enome from emp where age<25;
+//查询每个部门的最小年龄
+select deptid,min(age) from emp group by deptid;
+//查询工号为1701的员工
+select eno,enome,age,emp.deptid,depname from emp,dept where emp.deptid=dept.deptid and emp.eno='1701';
+select e.eno,e.enome,e.age,d.deptid,d.depname from emp e join dept d on e.deptid =d.deptid where e.eno ='1701';
+//查询年龄低于该部门平均年龄的员工信息
+select e1.eno,e1.enome,e1.deptid from emp e1 where e1.age>(select avg(age) from emp e2 where e1.deptid=e2.deptid);
+//创建索引
+create index index_name
+on emp(enome);
+//创建视图
+create view view_emp
+as
+select eno,enome,emp.deptid,depname from emp,dept where emp.deptid=dept.deptid and age>30;
+//事务
+begin transaction
+insert into emp values(......);
+//保存事务
+save transaction wang;
+insert into emp values(......);
+//事务的滚回
+rollback transaction wang;
+//事务的提交
+commit transaction
+//删除表
+drop table emp;
+
