@@ -1,0 +1,51 @@
+create table teacher1(
+no int,
+name varchar(10),
+age int,
+sal int,
+did int
+);
+//创建院系表
+create table dept1(
+did int,
+dname varchar(10)
+);
+insert into teacher1 values(1,'1',25,1000,1);
+insert into teacher1 values(2,'2',28,2000,2);
+insert into teacher1 values(3,'3',30,2200,1);
+insert into teacher1 values(4,'4',35,1500,2);
+insert into dept1 values(1,'办公室');
+insert into dept1 values(2,'后勤');
+
+//查询教师总人数
+select count(*) no from teacher1;
+//查询年龄不同的教师人数
+select count(*) no from teacher1 group by age;
+//查询教师的姓名和院系名称
+select name ,dname from teacher1,dept1 where teacher1.did=dept1.did;
+//查询院系名称和该院系教师的最大年龄
+select  dname,max(age) from dept1,teacher1 where teacher1.did=dept1.did group by dept1.dname;
+//查询院系名称和该院系教师的最大工资和最小工资
+select dname,max(sal),min(sal)  from dept1,teacher1 where teacher1.did=dept1.did group by dept1.dname;
+//查询工资最低的老师信息
+select * from teacher1 e1 where e1.sal=(select min(sal) from teacher1 );
+//查询年龄最小的教师信息
+select * from teacher1 e1 ,dept1 e2 where e1.did=e2.did and e1.age=(select min(age) from teacher1 );
+//查询不同院系工资最低的教师信息
+select * from teacher1 e1 ,dept1 e2 where e1.did=e2.did  and e1.age=(select min(age) from teacher1 where e1.did=e2.did) ;
+//查询工资低于平均工资的所有教师
+select * from teacher1 e1 ,dept1 e2 where e1.did=e2.did and e1.sal<(select avg(sal) from teacher1);
+//创建一个索引
+create index teacher_name_idx 
+on teacher1(name);
+//创建一个聚集索引
+create clustered index teacher_no_idx
+on teacher1(no);
+//创建一个视图
+create view teacher_v 
+as 
+select *from teacher1 ;
+//创建视图给工资排序
+create view teacher_v2
+as 
+select top 3 * from teacher1 order by sal desc;
