@@ -1,0 +1,38 @@
+/*½×²ã£¬ÓÃ´æ´¢º¯ÊıĞ´*/
+create proc p1 @n int,@r int output
+as
+declare @i int
+set @i=1
+set @r=1
+while @i<=@n
+begin
+set @r=@r*@i
+set @i=@i+1
+end
+declare @result int
+exec p1 5,@result output
+print @result
+
+/*Êä³öĞÇºÅ,´òÁâĞÎ*/
+declare @l int,@n1 varchar(20),@n2 varchar(20),@l1 int,@m int
+set @l=7
+set @n1='*********'
+set @n2='         '
+set @l1=(@l+1)/2
+set @m=1
+while @m<=@l1
+begin
+print left(@n2,@l1-@m)+left(@n1,2*@m-1)
+set @m=@m+1
+end
+declare @nn varchar(20),@nnn varchar(20)
+set @nnn='          '
+set @nn='*********'
+set @m=@l1
+while @l1>=1 
+begin
+print left(@nnn,@m-(@l1-1))+left(@nn,2*(@l1-1)-1)
+set @l1=@l1-1
+end
+
+
