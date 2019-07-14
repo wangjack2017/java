@@ -1,0 +1,12 @@
+service方法和doget方法和dopost方法：
+service方法：可以通过get和post请求
+doget方法：只可以通过get请求
+dopost方法：只可以通过post请求
+
+
+如果在service方法中书写了super()：
+如果service和doget和dopost方都存在，优先调用service方法，
+再父类的service方法，调用doget和dopost其中一个方法
+如果不书写：
+只调用本类的service方法，不再调用父类的service
+因此一般情况下我们不书写super()方法，避免出现错误
