@@ -1,0 +1,13 @@
+http的请求方式：
+1.0：get，post，head
+1.1：options,put,delete,trace,connect
+get和post请求方式的区别：
+一：
+get：请求数据是空的，用问号隔开将请求数据放在了请求头里
+post：具有请求数据
+二：
+get：传的是少量的信息
+post：可以传大量的信息
+三：
+get：不安全
+post：安全（在请求头里不可以看到具体的数据）
