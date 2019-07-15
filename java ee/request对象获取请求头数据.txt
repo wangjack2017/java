@@ -1,0 +1,36 @@
+无论是get还是post请求，获取数据都是通过request方法来获取键值
+用get和post请求的区别就是请求数据的可见性问题，安全性问题
+
+
+//获取请求方式
+				String str=arg0.getMethod();
+				System.out.println(str);
+				//获取请求url
+				StringBuffer  str1=arg0.getRequestURL();
+				System.out.println(str1);
+				//获取uri
+				String str3=arg0.getRequestURI();
+				System.out.println(str3);
+				//获取协议
+				String str4=arg0.getScheme();
+				System.out.println(str4);
+				//获取请求头的数据
+				  //获取指定的请求行的信息
+				String value=arg0.getHeader("aaa");
+				System.out.println(value);
+				  //获取所有的请求行的键的枚举
+				Enumeration<String> e=arg0.getHeaderNames();
+				while(e.hasMoreElements()) {
+					String str5=(String)e.nextElement();
+					String str6=arg0.getHeader(str5);
+					System.out.println(str5+":"+str6);
+				}
+			 
+				//获取请求数据
+			String name=arg0.getParameter("uname");
+			String password=arg0.getParameter("pwd");
+			System.out.println("******************");
+			System.out.println(name);
+			System.out.println(password);
+			
+			
