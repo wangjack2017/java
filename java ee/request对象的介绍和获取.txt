@@ -1,0 +1,40 @@
+request对象：
+服务器接收请求对象，创建request对象将实参传入servlet方法
+作用：
+封存了当前请求的所有信息
+使用：
+获取请求头数据
+获取请求行数据
+获取用户数据
+注意：
+request对象的创建由tomcat服务器创建，并作为实参传入到servlet的service方法中
+
+
+package com.wang;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class re
+ */
+public class re extends HttpServlet {
+	@Override
+	protected void service(HttpServletRequest arg0, HttpServletResponse arg1) throws ServletException, IOException {
+		//获取请求方式
+		String str=arg0.getMethod();
+		System.out.println(str);
+		//获取请求url
+		StringBuffer  str1=arg0.getRequestURL();
+		System.out.println(str1);
+		//获取uri
+		String str3=arg0.getRequestURI();
+		System.out.println(str3);
+		//获取协议
+		
+	}
+
+}
