@@ -1,0 +1,16 @@
+乱码问题解决：
+1.对string进行重新编码
+name=new String(name.getBytes("iso8859-1"),"utf-8");
+2.使用公共的配置
+get方式：
+1）在获得请求数据之前设置请求编码格式
+arg1.setcontentype("utf-8");
+2）在tomcat的目录下的conf目录中修改server.xml文件，在connector
+标签中增加属性usebodyencodingforuri=“true”
+usebodyencodingforuri="true"
+
+post方式：
+在获得请求数据之前设置请求编码格式
+arg1.setcontentype("utf-8");
+
+
