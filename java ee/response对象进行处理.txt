@@ -1,0 +1,49 @@
+package com.wang;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * response
+ * 作用：
+ *    用来响应数据到浏览器的一个对象
+ * 使用：
+ *    设置响应头
+ *      setHeader//在响应头中添加信息，但是同键会覆盖
+ *      addHeader//在响应头中添加信息，但是同键不会覆盖
+ *      senderror//设置错误
+ *    设置响应实体
+ */
+public class response extends HttpServlet {
+	@Override
+	protected void service(HttpServletRequest arg0, HttpServletResponse arg1) throws ServletException, IOException {
+    //设置响应编码格式
+		arg1.setContentType("text/html;charset=utf-8");
+	//获取请求信息
+	//处理请求
+	//响应处理结果
+		arg1.getWriter().write("<html>");
+		arg1.getWriter().write("<head>");
+		arg1.getWriter().write("</head>");
+		arg1.getWriter().write("<body>");
+		arg1.getWriter().write("<form action='login' method='get'>");
+		arg1.getWriter().write("用户名:<input type='text' name='uname'   value=''/><br/>");
+		arg1.getWriter().write("密码:<input type='password' name='pwd'   value=''/><br/>");
+		arg1.getWriter().write("<input type='submit'  value='登录'/><br/>");
+		arg1.getWriter().write("</form>");
+		arg1.getWriter().write("</body>");
+		arg1.getWriter().write("</html>");
+		
+		
+		
+		
+	}
+
+	
+	
+	
+
+}
