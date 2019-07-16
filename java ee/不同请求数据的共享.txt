@@ -1,0 +1,63 @@
+package com.wang;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * cookie学习：
+ * 作用：解决了发送不同请求之间的数据共享
+ * 使用：
+ *    //创建cookie对象（可选）
+ *    //设置有效期
+ *       c2.setMaxAge(3*24*3600);
+ *    //设置有效路径
+ *      c2.setpath("/04-servlet/abc");
+ *         Cookie c=new Cookie("mouse","thinkpad");
+ *    //响应cookie信息给客户端
+ *         arg1.addCookie(c);
+ *    //cookie的获取
+ *       Cookie [] cks=arg0.getCookies();
+		  for(Cookie c:cks) {
+			String name=c.getName();
+			String value=c.getValue();
+			System.out.println(name+":"+value);
+		}
+ * 
+ *         
+ * 注意：
+ * 一个cookie对象储存一条数据，多条数据可以多创建几个cookie对象进储存
+ * 特点：
+ * 浏览器端的数据储存技术
+ * 储存的数据声明在服务器端
+ * 临时储存，储存在浏览器的运行内存里，浏览器关闭就消失
+ * 定时储存，设置了cookie的有效期，储存在客户端的硬盘中，在有效期内符合路径的请求都会附带该信息
+ */
+public class cookieservlet extends HttpServlet {
+	@Override
+	protected void service(HttpServletRequest arg0, HttpServletResponse arg1) throws ServletException, IOException {
+	//设置请求编码格式
+		arg0.setCharacterEncoding("utf-8");
+	//设置响应编码格式
+		arg1.setContentType("text/html;charset=utf-8");
+	//获取请求信息
+	//处理请求信息
+	//响应处理请求
+		
+		
+		//使用cookie进行浏览器端的数据储存
+		   //创建cookie对象
+		   Cookie c=new Cookie("mouse","thinkpad");
+		   Cookie c2=new Cookie("key","bjsxt");
+		   //设置有效期
+		   c2.setMaxAge(3*24*3600);
+		   c2.setPath("/04-servlet-cookie/gggg");
+		   //响应cookie信息
+		   arg1.addCookie(c);
+		   arg1.addCookie(c2);
+		arg1.getWriter().write("cookie学习");
+	}
+}
