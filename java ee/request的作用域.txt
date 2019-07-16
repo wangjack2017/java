@@ -1,0 +1,12 @@
+request的作用域：一次请求的完成
+使用request实现不同的servlet的数据流转
+ arg0.setAttribute("", "");
+arg0.getAttribute("","");
+作用：
+解决了一次请求不同servlet的数据共享问题
+注意：
+使用request对象进行数据流转，数据只在一次请求内有效
+特点：
+服务器创建
+生命周期一次请求
+每次请求都会创建
