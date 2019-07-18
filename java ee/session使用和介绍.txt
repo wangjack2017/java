@@ -1,0 +1,89 @@
+package com.wang;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+/**
+ * 问题：
+ *    一个用户的不同请求处理的数据共享怎么办
+ * 解决：
+ *    使用session技术
+ * 原理：
+ *    用户第一次访问服务器，服务器
+ *    会创建一个session对象给此用户
+ *    并将session对象JSESSIONID使用cookie技术储存到浏览器中
+ *    保证用户的其他请求能够获取到同一个session对象，耶额能够保证不同的请求获取
+ *    到共享的对象
+ * 特点：
+ *    储存在服务器端
+ *    服务器进行创建
+ *    依赖于cookie技术
+ *    一次会话
+ *    默认储存时间是半小时
+ * 作用：
+ *    一个用户不同请求处理的数据共享问题
+ * 使用：
+ *    创建/获取session对象
+ *    HttpSession hs=arg0.getSession();//即是创建也是获取
+ *    如果请求中拥有session的标识符JSESSIONID，则返回对应的sessionID
+ *    如果请求中没有session的标识符JSESSIONID，则创建新的session对象，
+ *    并将JSESSIONID作为cookie储存在浏览器端
+ *    如果session对象失效了，也会重新创建一个session对象， 并将JSESSIONID
+ *    作为cookie储存在浏览器端
+ *    
+ *    设置储存时间：
+ *         hs.setMaxInactiveInterval(3*24*3600);
+ *     注意：
+ *        在指定时间内session对象没有被使用则销毁，如果使用了则重新计时
+ *     设置session强制失效：
+ *        hs.invalidate();
+ *     存储和获取数据：
+ *       存储：  hs.setAttribute("name", name);
+ *       获取：  hs.getAttribute("name");返回的数据类型为object，需要类型转化
+ *       注意：
+ *          储存的动作和去除的动作可以发生在不同的请求中，但是存储必须先于取出执行
+ *     使用时机：
+ *       一般用户在登陆web项目时会将用户的个人信息存储到session中，供该用户的其他请求使用
+ *     总结：
+ *       session解决了一个用户的不同请求的数据共享问题，只要在JSESSIONID不失效和session
+ *       对象不失效的情况下
+ *       用户在任意请求中都能获得同一个session的对象
+ *     作用域：
+ *       一次会话
+ *       在JSESSIONID不失效和session对象不失效的情况下为整个项目内
+ *     session失效处理：
+ *       将用户请求中的JSESSONIOID和后台获取到的 对象JSESSONIOID进行对比，如果一致
+ *       则session没有失效，如果不一致则证明失效了，重定向到登陆页面，让用户重新登陆
+ *      
+ * 
+ * 注意：
+ *    JSESSIONID储存在了cookie的临时储存空间中，浏览器关闭就消失  
+ *    
+ * 
+ */
+public class sessionservlet extends HttpServlet {
+	@Override
+	protected void service(HttpServletRequest arg0, HttpServletResponse arg1) throws ServletException, IOException {
+		//设置请求编码格式
+		arg0.setCharacterEncoding("utf-8");
+		//设置响应编码格式
+		arg1.setContentType("text/html;charset=utf-8");
+		//获取请求信息
+		  String name="王思伟";
+		//处理请求信息
+		      //创建session对象
+		        HttpSession hs=arg0.getSession();//即是创建也是获取
+		        System.out.println(hs.getId());  
+		      //储存数据
+		        hs.setAttribute("name", name);
+		//响应处理结果
+		        //直接响应
+		        arg1.getWriter().write("session 学习");
+		
+	}
+
+}
