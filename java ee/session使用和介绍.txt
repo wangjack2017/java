@@ -58,8 +58,13 @@ import javax.servlet.http.HttpSession;
  *     session失效处理：
  *       将用户请求中的JSESSONIOID和后台获取到的 对象JSESSONIOID进行对比，如果一致
  *       则session没有失效，如果不一致则证明失效了，重定向到登陆页面，让用户重新登陆
- *      
- * 
+ * 解决主页面用户名显示为null的问题：
+              原因：
+                 因为在用户登陆成功后使用重定向显示主页面，两次请求，而用户的信息
+                 在第一次请求中，第二次请求中没有用户数据，所以显示为null
+              解决：
+                   使用session
+ *           
  * 注意：
  *    JSESSIONID储存在了cookie的临时储存空间中，浏览器关闭就消失  
  *    
