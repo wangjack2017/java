@@ -1,0 +1,8 @@
+tomcat服务器：
+服务器是代码写的容器，用来自动运行代码
+服务器找的是servlet接口类来识别代码的，和java虚拟机调用main方法相似
+使用：
+1.创建普通的java类，并且继承httpservlet
+2.覆写service方法
+3.在service方法中书写逻辑代码即可
+4.在webcontent下的web-inf文件夹下的web.xml文件中配置servlet
