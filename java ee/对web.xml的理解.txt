@@ -1,0 +1,31 @@
+在web项目中和tomcat服务器下都有web.xml文件
+区别：
+      web项目下的web.xml文件为局部配置，针对本项目的位置
+      tomcat下的web.xml文件为全局配置，配置公共信息
+
+如果自己的项目和服务器都配了的配置，有限使用自己的
+
+内容：
+      全局上下文配置（全局参数）
+      servlet配置
+      过滤器配置
+      监听器配置
+     注意：
+            他们的配置没有先后顺序，加载有先后顺序
+     加载顺序：
+             web容器会按servletcontext-->context-param-->listener-->filter-->
+             servelt这个顺序加载组件
+     加载时期：
+             都是服务器启动的时候
+
+热部署和冷部署：
+热部署
+        修改项目的内容不需要重启服务器，也不需要将项目部署放在tomcat的webroot下
+        <Context path=""  reloadable="true"  docBase="项目的绝对路径">将这句话放在
+        server.xml的host里
+冷部署
+        每一次修改需要重启服务器
+            
+
+
+
