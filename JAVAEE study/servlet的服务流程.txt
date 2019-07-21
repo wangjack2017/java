@@ -1,0 +1,6 @@
+servlet服务的运行流程：
+url的组成：
+服务器地址端口号/webapps下的文件夹的名称/要执行的servlet的url-pattern
+
+web.xml配置的是servlet服务类的别名，具有安全性（class属性）
+
